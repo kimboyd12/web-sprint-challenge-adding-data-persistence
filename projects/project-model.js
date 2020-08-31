@@ -11,11 +11,12 @@ module.exports = {
     addProject,
     getResources,
     addResource,
-    addTask
+    addTask,
+    getTasks
 }
 
 function getProjects() {
-    return db("projects")
+    return db('projects')
 }
 
 function addProject(project) {
@@ -24,13 +25,21 @@ function addProject(project) {
 }
 
 function getResources() {
-    return db("resources")
+    return db('resources')
 }
 
 function addResource(resource) {
     return db('resources')
     .insert(resource)
 }
+
+function getTasks(projectId) {
+    return db('tasks as t')
+        .join('projects as p', 'p.id', '=', 'project_id')
+        .select('t.id as TaskID', 't.description as TaskDesc', 't.notes as Notes', 't.is_completed as Completed',
+            'p.project_name as ProjectName', 'p.description as ProjectDesc')
+        .orderBy('t.id')
+}   
 
 function addTask(task) {
     return db('tasks')

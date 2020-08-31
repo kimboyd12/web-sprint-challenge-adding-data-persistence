@@ -27,11 +27,11 @@ exports.up = async function(knex) {
              .onDelete('CASCADE')
     })
 
-    await knex.schema.createTable("resources_tasks", (table) => {
-        table.integer("resource_id")
+    await knex.schema.createTable("projects_tasks", (table) => {
+        table.integer("task_id")
              .notNull()
              .references("id")
-             .inTable("resources")
+             .inTable("tasks")
         table.integer("project_id")
              .notNull()
              .references("id")
@@ -44,7 +44,7 @@ exports.up = async function(knex) {
 
 
 exports.down = async function(knex) {
-    await knex.schema.dropTableIfExists("resources_tasks")
+    await knex.schema.dropTableIfExists("projects_tasks")
     await knex.schema.dropTableIfExists("tasks")
     await knex.schema.dropTableIfExists("resources")
     await knex.schema.dropTableIfExists("projects")

@@ -57,6 +57,20 @@ router.post("/resources", (req, res) => {
         })
 })
 
+// Get Tasks
+router.get("/tasks", (req, res) => {
+    Projects.getTasks()
+        .then(tasks => {
+            res.json(tasks)
+        })
+        .catch(error => {
+            console.log(error)
+            res.status(500).json({
+                message: "Failed to get tasks"
+            })
+        })
+})
+
 // Add Task
 router.post("/tasks", (req, res) => {
     const taskData = req.body

@@ -1,4 +1,4 @@
-
+1
 exports.seed = function(knex) {
       return knex('tasks').insert([
         {
